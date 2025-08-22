@@ -3,11 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class FinishLine : MonoBehaviour
 {
+    [SerializeField] float delayBeforeReload = 1f;
+    [SerializeField] ParticleSystem finishEffect;
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
-        {
-            Invoke("ReloadScene", 1f);
+        {   
+            finishEffect.Play();
+            Invoke("ReloadScene", delayBeforeReload);
         }
     }
     
