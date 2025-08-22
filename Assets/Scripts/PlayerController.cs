@@ -9,22 +9,33 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float boostSpeed = 30f;
     [SerializeField] float normalSpeed = 20f;
 
+    bool move = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        surfaceEffector = FindObjectOfType<SurfaceEffector2D>();
+        surfaceEffector = FindFirstObjectByType<SurfaceEffector2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (move)
+        {
         RotatePlayer();
         BoostPlayer();
+            
+        }
+    }
+    
+    public void DisableControls()
+    {
+        move = false;
     }
 
     private void BoostPlayer()
     {
-        if(Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
             surfaceEffector.speed = boostSpeed;
         }
